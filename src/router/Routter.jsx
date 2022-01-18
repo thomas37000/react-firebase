@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { UserContextProvider } from "../context/UserContext";
-import SignUpModal from "../components/SignUpModal";
-import SignInModal from "../components/SignInModal";
+import SignUpModal from "../components/modal/SignUpModal";
+import SignInModal from "../components/modal/SignInModal";
 import Navbar from "../components/Navbar";
 import Home from "../components/Home";
 
