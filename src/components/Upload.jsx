@@ -62,11 +62,14 @@ const Upload = () => {
       <div>{error && <div className="error">{error}</div>}</div>
       {file && <div>{file.name} </div>}
       <h3>Chargement réussi à :{progress}%</h3>
-      {showProgress && (
-        <div className="circular-progress-bar">
-          <CircularProgressbar value={progress} />
-        </div>
-      )}
+      {/* le component CircularProgressbar s'affiche 1 FOIS SUR 2 ? */}
+      <div className="circular-progress-bar">
+        {showProgress && <CircularProgressbar value={progress} />}
+      </div>
+
+      {/* <div className="circular-progress-bar">
+        <CircularProgressbar value={progress} />
+      </div> */}
     </>
   );
 };
