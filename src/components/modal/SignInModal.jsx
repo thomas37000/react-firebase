@@ -43,13 +43,13 @@ const SignInModal = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="signUpPwd" className="form-label">
+                      <label htmlFor="signInPwd" className="form-label">
                         Mot de Passe
                       </label>
                       <input
                         type="password"
                         name="pwd"
-                        id="signUpPwd"
+                        id="signInPwd"
                         className="form-control"
                         required
                       />{" "}

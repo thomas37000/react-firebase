@@ -2,28 +2,40 @@ import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 
 const SignUpModal = () => {
-  const { modalState, toggleModals } = useContext(UserContext);
-  const [validation, setValidation] = useState("");
+  const { modalState, toggleModals, signUpContext } = useContext(UserContext);
+  const [validationMp, setValidationMp] = useState("");
+  const [validationEmail, setValidationEmail] = useState("");
 
-  // si il existe et qu'il est pas déjà dans le tableau inputs => je le rajoute & push
   const inputs = useRef([]);
   const currentRef = inputs.current;
 
+  // si il existe et qu'il est pas déjà dans le tableau inputs => je le rajoute & push
   const addInputs = (el) => {
     if (el && !currentRef.includes(el)) {
       currentRef.push(el);
     }
   };
 
-  const handleForm = (e) => {
+  const formRef = useRef();
+
+  const handleForm = async (e) => {
     e.preventDefault();
     if ((currentRef[1].value.length || currentRef[2].value.length) < 6) {
-      setValidation("6 charactères min");
+      setValidationMp("6 charactères minimum");
       return;
     } else if (currentRef[1].value !== currentRef[2].value) {
-      setValidation("Passwords incorrect !");
+      setValidationMp("Mot de Passe incorrect !");
       return;
     }
+    try {
+      const createUSer = await signUpContext(
+        currentRef[0].value,
+        currentRef[1].value
+      );
+      console.log(createUSer);
+      // vider les messages d'érreur au submit
+      formRef.current.reset();
+    } catch (error) {}
   };
 
   return (
@@ -49,7 +61,11 @@ const SignUpModal = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <form className="sign-up-form" onSubmit={handleForm}>
+                  <form
+                    className="sign-up-form"
+                    onSubmit={handleForm}
+                    ref={formRef}
+                  >
                     <div className="mb-3">
                       <label htmlFor="signUpEmail" className="form-label">
                         adresse Email
@@ -62,6 +78,7 @@ const SignUpModal = () => {
                         className="form-control"
                         required
                       />
+                      <p className="text-danger mt-1">{validationEmail}</p>
                     </div>
                     <div className="mb-3">
                       <label htmlFor="signUpPwd" className="form-label">
@@ -75,22 +92,22 @@ const SignUpModal = () => {
                         className="form-control"
                         required
                       />{" "}
-                      <p className="text-danger mt-1">{validation}</p>
+                      <p className="text-danger mt-1">{validationMp}</p>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="signUpPwd" className="form-label">
+                      <label htmlFor="repeatPwd" className="form-label">
                         Répétez votre Mot de Passe
                       </label>
                       <input
                         ref={addInputs}
                         type="password"
                         name="pwd"
-                        id="signUpPwd"
+                        id="repeatPwd"
                         className="form-control"
                         required
                       />{" "}
                     </div>
-                    <p className="text-danger mt-1">{validation}</p>
+                    <p className="text-danger mt-1">{validationMp}</p>
 
                     <button className="btn btn-primary">Validez</button>
                   </form>

@@ -7,3 +7,7 @@ form {
   height: 200px;
   margin: 0 auto;
 }
+
+.btn {
+  font-size: 0.7rem;
+}
