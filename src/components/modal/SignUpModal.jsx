@@ -1,4 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 const SignUpModal = () => {
@@ -17,6 +18,7 @@ const SignUpModal = () => {
   };
 
   const formRef = useRef();
+  const navigate = useNavigate();
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -33,8 +35,11 @@ const SignUpModal = () => {
         currentRef[1].value
       );
       console.log(createUSer);
-      // vider les messages d'érreur au submit
+
       formRef.current.reset();
+      toggleModals("close");
+      // quand user s'inscrit redirection vers la route privée
+      navigate("/private/home");
     } catch (error) {
       // voir les érreurs venant de Firebase dans la console au submit
       // console.dir(error);}

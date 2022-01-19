@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -11,10 +11,19 @@ export const UserContext = createContext();
 export function UserContextProvider(props) {
   const signUpContext = (email, pwd) =>
     createUserWithEmailAndPassword(Auth, email, pwd);
-  //  const signInContext = (email, pwd) => signInWithEmailAndPassword(auth, email, pwd);
 
   const [currentUser, setCurrentUser] = useState();
   const [loadingData, setLoadingData] = useState(true);
+
+  // fonction pour se désabonner ou si connecté ou pas avec LoadingData qui devient false
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(Auth, (currentUser) => {
+      setCurrentUser(currentUser);
+      setLoadingData(false);
+    });
+
+    return unsubscribe;
+  });
 
   // modal
   const [modalState, setModalState] = useState({
@@ -44,8 +53,10 @@ export function UserContextProvider(props) {
   };
 
   return (
-    <UserContext.Provider value={{ modalState, toggleModals, signUpContext, currentUser }}>
-      {props.children}
+    <UserContext.Provider
+      value={{ modalState, toggleModals, signUpContext, currentUser }}
+    >
+      {!loadingData && props.children}
     </UserContext.Provider>
   );
 }
