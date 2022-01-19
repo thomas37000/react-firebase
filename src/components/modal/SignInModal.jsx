@@ -1,10 +1,17 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import eyeClose from "../icons/eye-close.svg";
+import eye from "../icons/eye.svg";
 
 const SignInModal = () => {
   const { modalState, toggleModals, signInContext } = useContext(UserContext);
   const [validation, setValidation] = useState("");
+
+  const [mp, setMp] = useState(false);
+  const togglePassword = () => {
+    setMp(mp ? false : true);
+  };
 
   const navigate = useNavigate();
 
@@ -30,7 +37,7 @@ const SignInModal = () => {
       setValidation("");
       toggleModals("close");
       navigate("/private/profil");
-    } catch   {
+    } catch {
       setValidation("Email ou Mot de passe incorrect");
     }
   };
@@ -55,7 +62,7 @@ const SignInModal = () => {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Sign Up</h5>
+                  <h5 className="modal-title">Connexion</h5>
                   <button onClick={closeModal} className="btn-close"></button>
                 </div>
 
@@ -87,9 +94,27 @@ const SignInModal = () => {
                         ref={addInputs}
                         name="pwd"
                         required
-                        type="password"
+                        type={mp ? "text" : "password"}
                         className="form-control"
                         id="signInPwd"
+                      />
+                      <img
+                        onClick={togglePassword}
+                        src={mp ? eye : eyeClose}
+                        alt={
+                          mp
+                            ? "affiche le mot de passe"
+                            : "cache le mot de passe"
+                        }
+                        className="eyes"
+                        style={{
+                          position: "relative",
+                          float: "right",
+                          margin: "-30px",
+                          marginRight: "10px",
+                          width: "20px",
+                          opacity: "0.6",
+                        }}
                       />
                       <p className="text-danger mt-1">{validation}</p>
                     </div>

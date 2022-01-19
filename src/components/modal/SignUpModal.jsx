@@ -1,11 +1,24 @@
 import React, { useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import eyeClose from "../icons/eye-close.svg";
+import eye from "../icons/eye.svg";
 
 const SignUpModal = () => {
   const { modalState, toggleModals, signUpContext } = useContext(UserContext);
   const [validationMp, setValidationMp] = useState("");
   const [validationEmail, setValidationEmail] = useState("");
+
+  const [mp, setMp] = useState(false);
+  const [mp2, setMp2] = useState(false);
+
+  const togglePassword = () => {
+    setMp(mp ? false : true);
+  };
+
+  const togglePasswordRepeat = () => {
+    setMp2(mp2 ? false : true);
+  };
 
   const inputs = useRef([]);
   const currentRef = inputs.current;
@@ -109,12 +122,30 @@ const SignUpModal = () => {
                       </label>
                       <input
                         ref={addInputs}
-                        type="password"
+                        type={mp ? "text" : "password"}
                         name="pwd"
                         id="signUpPwd"
                         className="form-control"
                         required
-                      />{" "}
+                      />
+                      <img
+                        onClick={togglePassword}
+                        src={mp ? eye : eyeClose}
+                        alt={
+                          mp
+                            ? "affiche le mot de passe"
+                            : "cache le mot de passe"
+                        }
+                        className="eyes"
+                        style={{
+                          position: "relative",
+                          float: "right",
+                          margin: "-30px",
+                          marginRight: "10px",
+                          width: "20px",
+                          opacity: "0.6",
+                        }}
+                      />
                       <p className="text-danger mt-1">{validationMp}</p>
                     </div>
                     <div className="mb-3">
@@ -123,12 +154,30 @@ const SignUpModal = () => {
                       </label>
                       <input
                         ref={addInputs}
-                        type="password"
+                        type={mp2 ? "text" : "password"}
                         name="pwd"
                         id="repeatPwd"
                         className="form-control"
                         required
-                      />{" "}
+                      />
+                      <img
+                        onClick={togglePasswordRepeat}
+                        src={mp2 ? eye : eyeClose}
+                        alt={
+                          mp2
+                            ? "affiche le mot de passe"
+                            : "cache le mot de passe"
+                        }
+                        className="eyes"
+                        style={{
+                          position: "relative",
+                          float: "right",
+                          margin: "-30px",
+                          marginRight: "10px",
+                          width: "20px",
+                          opacity: "0.6",
+                        }}
+                      />
                     </div>
                     <p className="text-danger mt-1">{validationMp}</p>
 

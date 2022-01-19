@@ -56,8 +56,12 @@ const Upload = () => {
   return (
     <>
       <form onSubmit={formHandler}>
-        <input type="file" className="input" />
-        <button type="submit">Upload</button>
+        <button type="button" className="btn btn-light ms-2">
+          <input type="file" className="input" />
+        </button>
+        <button type="submit" className="btn btn-light ms-2">
+          Upload
+        </button>
       </form>
       <div>{error && <div className="error">{error}</div>}</div>
       {file && <div>{file.name} </div>}
