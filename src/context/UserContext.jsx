@@ -44,7 +44,7 @@ export function UserContextProvider(props) {
   };
 
   return (
-    <UserContext.Provider value={{ modalState, toggleModals, signUpContext }}>
+    <UserContext.Provider value={{ modalState, toggleModals, signUpContext, currentUser }}>
       {props.children}
     </UserContext.Provider>
   );
