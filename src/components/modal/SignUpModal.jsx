@@ -35,7 +35,24 @@ const SignUpModal = () => {
       console.log(createUSer);
       // vider les messages d'érreur au submit
       formRef.current.reset();
-    } catch (error) {}
+    } catch (error) {
+      // voir les érreurs venant de Firebase dans la console au submit
+      // console.dir(error);}
+      if (error.code === "auth/invalid-email") {
+        setValidationEmail("Email format invalide !");
+      }
+
+      if (error.code === "auth/email-already-in-use") {
+        setValidationEmail("Email déjà utilisé ou enregistré !");
+      }
+    }
+  };
+
+  // efface les méssages d'érreurs et ferme le modale avec toggleModals
+  const closeModal = () => {
+    setValidationMp("");
+    setValidationEmail("");
+    toggleModals("close");
   };
 
   return (
@@ -44,7 +61,7 @@ const SignUpModal = () => {
         <div className="position-fixed top-0 vw-100 vh-100">
           <div
             className="w-100 h-100 bg-dark bg-opacity-75"
-            onClick={() => toggleModals("close")}
+            onClick={() => closeModal()}
           ></div>
           <div
             className="position-absolute top-50 start-50 translate-middle"
@@ -57,7 +74,7 @@ const SignUpModal = () => {
                   <button
                     type="button"
                     className="btn-close"
-                    onClick={() => toggleModals("close")}
+                    onClick={() => closeModal()}
                   ></button>
                 </div>
                 <div className="modal-body">
