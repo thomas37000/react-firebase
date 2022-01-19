@@ -6,16 +6,16 @@ import { Auth } from "../firebase/config";
 
 const Navbar = () => {
   const { toggleModals } = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const logout = async () => {
     try {
-      await signOut(Auth)
-      navigate("/")
+      await signOut(Auth);
+      navigate("/");
     } catch {
-      alert("vider votre cache internet.")
+      alert("vider votre cache internet.");
     }
-  }
+  };
 
   return (
     <>
@@ -38,7 +38,16 @@ const Navbar = () => {
           >
             Connexion
           </button>
-          <button type="button" className="btn btn-danger ms-2" onClick={logout}>
+          <button type="button" className="btn btn-light ms-2">
+            <Link to="/private/profil" className="navbar-brand">
+              profil
+            </Link>
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger ms-2"
+            onClick={logout}
+          >
             Déconnexion
           </button>
         </div>

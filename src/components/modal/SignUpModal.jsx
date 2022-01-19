@@ -22,8 +22,9 @@ const SignUpModal = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
+
     if ((currentRef[1].value.length || currentRef[2].value.length) < 6) {
-      setValidationMp("6 charactères minimum");
+      setValidationMp("6 charactères minimum !");
       return;
     } else if (currentRef[1].value !== currentRef[2].value) {
       setValidationMp("Mot de Passe incorrect !");
@@ -39,7 +40,7 @@ const SignUpModal = () => {
       formRef.current.reset();
       toggleModals("close");
       // quand user s'inscrit redirection vers la route privée
-      navigate("/private/home");
+      navigate("/private/profil");
     } catch (error) {
       // voir les érreurs venant de Firebase dans la console au submit
       // console.dir(error);}

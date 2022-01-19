@@ -1,19 +1,53 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const SignInModal = () => {
-  const { modalState, toggleModals } = useContext(UserContext);
+  const { modalState, toggleModals, signInContext } = useContext(UserContext);
+  const [validation, setValidation] = useState("");
+
+  const navigate = useNavigate();
+
+  const inputs = useRef([]);
+  const currentRef = inputs.current;
+
+  const addInputs = (el) => {
+    if (el && !currentRef.includes(el)) {
+      currentRef.push(el);
+    }
+  };
+
+  const formRef = useRef();
+
+  const handleForm = async (e) => {
+    e.preventDefault();
+    try {
+      const connexion = await signInContext(
+        currentRef[0].value,
+        currentRef[1].value
+      );
+
+      setValidation("");
+      toggleModals("close");
+      navigate("/private/profil");
+    } catch   {
+      setValidation("Email ou Mot de passe incorrect");
+    }
+  };
+
+  const closeModal = () => {
+    setValidation("");
+    toggleModals("close");
+  };
 
   return (
     <>
       {modalState.signInModal && (
         <div className="position-fixed top-0 vw-100 vh-100">
           <div
+            onClick={closeModal}
             className="w-100 h-100 bg-dark bg-opacity-75"
-            // onClick={}
-          >
-            {" "}
-          </div>
+          ></div>
           <div
             className="position-absolute top-50 start-50 translate-middle"
             style={{ minWidth: "400px" }}
@@ -21,40 +55,46 @@ const SignInModal = () => {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Connexion</h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => toggleModals("close")}
-                  ></button>
+                  <h5 className="modal-title">Sign Up</h5>
+                  <button onClick={closeModal} className="btn-close"></button>
                 </div>
+
                 <div className="modal-body">
-                  <form className="sign-up-form">
+                  <form
+                    ref={formRef}
+                    onSubmit={handleForm}
+                    className="sign-up-form"
+                  >
                     <div className="mb-3">
-                      <label htmlFor="signUpEmail" className="form-label">
+                      <label htmlFor="signInEmail" className="form-label">
                         adresse Email
                       </label>
                       <input
-                        type="email"
+                        ref={addInputs}
                         name="email"
-                        id="signUpEmail"
-                        className="form-control"
                         required
+                        type="email"
+                        className="form-control"
+                        id="signInEmail"
                       />
                     </div>
+
                     <div className="mb-3">
                       <label htmlFor="signInPwd" className="form-label">
                         Mot de Passe
                       </label>
                       <input
-                        type="password"
+                        ref={addInputs}
                         name="pwd"
-                        id="signInPwd"
-                        className="form-control"
                         required
-                      />{" "}
+                        type="password"
+                        className="form-control"
+                        id="signInPwd"
+                      />
+                      <p className="text-danger mt-1">{validation}</p>
                     </div>
-                    <button className="btn btn-primary">Validez</button>
+
+                    <button className="btn btn-primary">Submit</button>
                   </form>
                 </div>
               </div>

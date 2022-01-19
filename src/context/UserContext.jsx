@@ -9,8 +9,12 @@ import { Auth } from "../firebase/config";
 export const UserContext = createContext();
 
 export function UserContextProvider(props) {
+  
   const signUpContext = (email, pwd) =>
     createUserWithEmailAndPassword(Auth, email, pwd);
+
+  const signInContext = (email, pwd) =>
+    signInWithEmailAndPassword(Auth, email, pwd);
 
   const [currentUser, setCurrentUser] = useState();
   const [loadingData, setLoadingData] = useState(true);
@@ -54,7 +58,7 @@ export function UserContextProvider(props) {
 
   return (
     <UserContext.Provider
-      value={{ modalState, toggleModals, signUpContext, currentUser }}
+      value={{ modalState, toggleModals, signUpContext, currentUser, signInContext }}
     >
       {!loadingData && props.children}
     </UserContext.Provider>

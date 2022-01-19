@@ -18,7 +18,7 @@ const Routter = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/private" element={<Private />}>
-            <Route path="/private/home" element={<UserConnected />}></Route>
+            <Route path="/private/profil" element={<UserConnected />} />
           </Route>
         </Routes>
       </UserContextProvider>
