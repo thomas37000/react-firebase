@@ -27,7 +27,7 @@ export function UserContextProvider(props) {
     });
 
     return unsubscribe;
-  });
+  }, []);
 
   // modal
   const [modalState, setModalState] = useState({

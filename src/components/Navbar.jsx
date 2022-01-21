@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { Auth } from "../firebase/config";
-import firebase from '../components/icons/firebase.png'
+import firebase from "../components/icons/firebase.png";
 
 const Navbar = () => {
   const { toggleModals } = useContext(UserContext);
@@ -25,29 +25,25 @@ const Navbar = () => {
           <img src={firebase} alt="acceuil" className="logo-acceuil" />
         </Link>
         <div>
-          <button
-            type="button"
+          <Link
+            to="/inscription"
             className="btn btn-primary"
             onClick={() => toggleModals("signUp")}
           >
-            <Link to="/inscription" className="navbar-brand">
-              Inscription
-            </Link>
-          </button>
-          <button
-            type="button"
+            Inscription
+          </Link>
+          <Link
+            to="/connexion"
             className="btn btn-primary ms-2"
             onClick={() => toggleModals("signIn")}
           >
-            <Link to="/connexion" className="navbar-brand">
-              Connexion
-            </Link>
-          </button>
-          <button type="button" className="btn btn-light ms-2">
-            <Link to="/private/profil" className="navbar-brand">
-              profil
-            </Link>
-          </button>
+            Connexion
+          </Link>
+
+          <Link to="/private/profil" className="btn btn-light ms-2">
+            profil
+          </Link>
+
           <button
             type="button"
             className="btn btn-danger ms-2"

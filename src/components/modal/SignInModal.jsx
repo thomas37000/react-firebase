@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 // useNavigate remplace useHistory dans React router V6
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import eyeClose from "../icons/eye-close.svg";
 import eye from "../icons/eye.svg";
 
@@ -123,6 +123,11 @@ const SignInModal = () => {
 
                     <button className="btn btn-primary">Submit</button>
                   </form>
+                  <div>
+                    <Link to="/modifier" className="d-flex justify-content-end">
+                      Mot de passe oublié
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
