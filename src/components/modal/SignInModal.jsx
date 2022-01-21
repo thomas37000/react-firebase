@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
+// useNavigate remplace useHistory dans React router V6
 import { useNavigate } from "react-router-dom";
 import eyeClose from "../icons/eye-close.svg";
 import eye from "../icons/eye.svg";
@@ -45,6 +46,7 @@ const SignInModal = () => {
   const closeModal = () => {
     setValidation("");
     toggleModals("close");
+    navigate("/");
   };
 
   return (
@@ -82,7 +84,7 @@ const SignInModal = () => {
                         required
                         type="email"
                         className="form-control"
-                        id="signInEmail"
+                        // id="signInEmail"
                       />
                     </div>
 
@@ -96,7 +98,7 @@ const SignInModal = () => {
                         required
                         type={mp ? "text" : "password"}
                         className="form-control"
-                        id="signInPwd"
+                        // id="signInPwd"
                       />
                       <img
                         onClick={togglePassword}

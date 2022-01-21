@@ -56,7 +56,7 @@ const Upload = () => {
   return (
     <>
       <form onSubmit={formHandler}>
-        <button type="button" className="btn btn-light ms-2">
+        <button type="button" className="btn btn-light ms-2 upload">
           <input type="file" className="input" />
         </button>
         <button type="submit" className="btn btn-light ms-2">

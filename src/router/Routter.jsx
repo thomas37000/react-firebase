@@ -17,6 +17,8 @@ const Routter = () => {
         <SignInModal />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/inscription" element={<SignUpModal />} />
+          <Route path="/connexion" element={<SignInModal />} />
           <Route path="/private" element={<Private />}>
             <Route path="/private/profil" element={<UserConnected />} />
           </Route>

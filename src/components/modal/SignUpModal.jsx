@@ -72,6 +72,7 @@ const SignUpModal = () => {
     setValidationMp("");
     setValidationEmail("");
     toggleModals("close");
+    navigate("/");
   };
 
   return (
@@ -110,7 +111,7 @@ const SignUpModal = () => {
                         ref={addInputs}
                         type="email"
                         name="email"
-                        id="signUpEmail"
+                        // id="signUpEmail"
                         className="form-control"
                         required
                       />
@@ -124,7 +125,7 @@ const SignUpModal = () => {
                         ref={addInputs}
                         type={mp ? "text" : "password"}
                         name="pwd"
-                        id="signUpPwd"
+                        // id="signUpPwd"
                         className="form-control"
                         required
                       />
@@ -156,7 +157,7 @@ const SignUpModal = () => {
                         ref={addInputs}
                         type={mp2 ? "text" : "password"}
                         name="pwd"
-                        id="repeatPwd"
+                        // id="repeatPwd"
                         className="form-control"
                         required
                       />
