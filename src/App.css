@@ -2,12 +2,6 @@ form {
   margin: 2rem;
 }
 
-.circular-progress-bar {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-}
-
 .navbar-brand {
   padding: 0;
 }
@@ -20,10 +14,6 @@ form {
 
 .btn-danger {
   width: 110px;
-}
-
-.upload {
-  width: 200px;
 }
 
 .logo-acceuil {
