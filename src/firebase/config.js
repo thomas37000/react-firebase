@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 //database from firebase
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
+import firebase from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,5 +22,6 @@ const projectStorage = getStorage(firebaseApp);
 const projectFirestore = getFirestore(firebaseApp);
 const Auth = getAuth(firebaseApp);
 const db = getDatabase(firebaseApp);
+// const timestamp = projectFirestore.FieldValue.serverTimestamp;
 
 export { projectStorage, projectFirestore, Auth, firebaseApp, db };

@@ -6,9 +6,9 @@ import eye from "../icons/eye.svg";
 
 const SignUpModal = () => {
   const { modalState, toggleModals, signUpContext } = useContext(UserContext);
+
   const [validationMp, setValidationMp] = useState("");
   const [validationEmail, setValidationEmail] = useState("");
-
   const [mp, setMp] = useState(false);
   const [mp2, setMp2] = useState(false);
 
@@ -83,6 +83,7 @@ const SignUpModal = () => {
             className="w-100 h-100 bg-dark bg-opacity-75"
             onClick={() => closeModal()}
           ></div>
+
           <div
             className="position-absolute top-50 start-50 translate-middle"
             style={{ minWidth: "400px" }}
@@ -97,6 +98,7 @@ const SignUpModal = () => {
                     onClick={() => closeModal()}
                   ></button>
                 </div>
+
                 <div className="modal-body">
                   <form
                     className="sign-up-form"
@@ -117,6 +119,7 @@ const SignUpModal = () => {
                       />
                       <p className="text-danger mt-1">{validationEmail}</p>
                     </div>
+
                     <div className="mb-3">
                       <label htmlFor="signUpPwd" className="form-label">
                         Créer un Mot de Passe
@@ -149,6 +152,7 @@ const SignUpModal = () => {
                       />
                       <p className="text-danger mt-1">{validationMp}</p>
                     </div>
+
                     <div className="mb-3">
                       <label htmlFor="repeatPwd" className="form-label">
                         Répétez votre Mot de Passe
@@ -182,7 +186,9 @@ const SignUpModal = () => {
                     </div>
                     <p className="text-danger mt-1">{validationMp}</p>
 
-                    <button className="btn btn-primary">Validez</button>
+                    <button type="button" className="btn btn-primary">
+                      Validez
+                    </button>
                   </form>
                 </div>
               </div>

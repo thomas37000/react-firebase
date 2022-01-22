@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 // useNavigate remplace useHistory dans React router V6
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import eyeClose from "../icons/eye-close.svg";
 import eye from "../icons/eye.svg";
 
@@ -65,7 +65,7 @@ const SignInModal = () => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Connexion</h5>
-                  <button onClick={closeModal} className="btn-close"></button>
+                  <button type="button" onClick={closeModal} className="btn-close"></button>
                 </div>
 
                 <div className="modal-body">
@@ -121,7 +121,9 @@ const SignInModal = () => {
                       <p className="text-danger mt-1">{validation}</p>
                     </div>
 
-                    <button className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">
+                      Submit
+                    </button>
                   </form>
                   <div>
                     <Link to="/modifier" className="d-flex justify-content-end">

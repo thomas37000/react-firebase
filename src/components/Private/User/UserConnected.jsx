@@ -10,8 +10,12 @@ const UserConnected = () => {
       <div className="card" style={{ width: "25rem" }}>
         <Upload />
         <div className="card-body">
-          <h5 className="card-title"> Bienvenue {currentUser.email}! </h5>
-          <p className="card-text"></p>
+          <h5 className="card-title"> Bienvenue {currentUser.username}! </h5>
+          <div className="email">{currentUser.email}</div>
+          <p className="card-text">{currentUser.description}</p>
+        </div>
+        <div className="card-footer">
+          {currentUser.city} - {currentUser.country}
         </div>
       </div>
     </div>
