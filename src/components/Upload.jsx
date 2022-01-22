@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { projectStorage } from "../firebase/config.js";
+import { db, projectStorage } from "../firebase/config.js";
 import "./Upload.css";
 
 // Import react-circular-progressbar module and styles
@@ -11,8 +11,8 @@ const Upload = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [showProgress, setShowProgress] = useState(false);
   const [url, setUrl] = useState("");
+  const [database, setDatabase] = useState(null);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -27,7 +27,6 @@ const Upload = () => {
       setError("Please select an file file like png or jpg or svg or webp");
     }
     uploadFiles(selectedImg);
-    setShowProgress(!showProgress);
   };
 
   const uploadFiles = (file) => {
@@ -55,6 +54,15 @@ const Upload = () => {
     );
   };
 
+  /********************* après le upload de l'image ************************************************** */
+  /********************* state null pour faire disparaitre la ProgressBar **************************** */
+  
+  // useEffect(() => {
+  //   if (url) {
+  //     setFile(null);
+  //   }
+  // }, [url]);
+
   return (
     <>
       <form onSubmit={formHandler}>
@@ -64,20 +72,24 @@ const Upload = () => {
         </button>
       </form>
       <div>{error && <div className="error">{error}</div>}</div>
-      {file && (
-        <div>
-          <div style={{ color: " #f1f1f1" }}>
-            Chargement réussi à :{progress}%
-          </div>
 
-          <div className="circular-progress-bar">
-            {showProgress && <CircularProgressbar value={progress} />}
+      <div className="container-img-upload">
+        {/* Progress Bar */}
+
+        {/* {file && (
+          <div>
+            <div style={{ color: " #f1f1f1" }}>
+              Chargement réussi à :{progress}%
+            </div>
+
+            <div className="circular-progress-bar">
+              {file && <CircularProgressbar value={progress} />}
+            </div>
           </div>
-          <div className="img-upload">
-            <img src={url} alt={file.name} />
-          </div>
-        </div>
-      )}
+        )} */}
+
+        {file && <img src={url} alt={file.name} className="img-profil" />}
+      </div>
     </>
   );
 };
