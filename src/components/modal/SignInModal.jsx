@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 // useNavigate remplace useHistory dans React router V6
