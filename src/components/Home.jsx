@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import { query, orderBy} from "firebase/firestore";
+
 import { db } from "../firebase/config";
 import "../App.css";
 
@@ -20,10 +22,15 @@ const Home = () => {
 
   // "users" nom de la collection sur Firestore Database
   const usersCollectionRef = collection(db, "users");
+  const userQuery = query(
+    usersCollectionRef,
+    // where("city", "==", "Nantes"),
+    orderBy("username", "asc")
+  );
 
   // récupérer les données du Firestore avec snapshot
-  useEffect(() => {
-    onSnapshot(usersCollectionRef, (snapshot) => {
+  function getCards() {
+    onSnapshot(userQuery,(snapshot) => {
       setUsers(
         snapshot.docs.map((doc) => {
           return {
@@ -34,6 +41,10 @@ const Home = () => {
         })
       );
     });
+  }
+
+  useEffect(() => {
+    getCards();
   }, []);
 
   const handleSubmit = (e) => {
@@ -64,7 +75,7 @@ const Home = () => {
       <h1 className="display-3 text-light">React Firebase App</h1>
 
       {users.map((user, i) => (
-        <div className="card-grid">
+        <div className="card-grid" key={user.id}>
           <div className="card" style={{ width: "25rem" }}>
             <div className="card-body">
               <h5 className="card-title"> {user.username} </h5>
@@ -81,7 +92,7 @@ const Home = () => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">modifier votre Profil</h5>
+            <h5 className="modal-title">Créer un article</h5>
           </div>
 
           <div className="modal-body">
