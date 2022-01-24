@@ -1,20 +1,12 @@
-import { useState, useEffect, useContext } from "react";
-import {
-  collection,
-  onSnapshot,
-  doc,
-  addDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { UserContext } from "../context/UserContext";
-import Upload from "./Upload";
-import { projectFirestore } from "../firebase/config";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
+import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
+import "../App.css";
 
 const Home = () => {
-  const { currentUser } = useContext(UserContext);
-
   const [users, setUsers] = useState([]);
-  // console.log("data", users);
+  console.log("data", users);
 
   const [form, setForm] = useState({
     age: null,
@@ -27,7 +19,7 @@ const Home = () => {
   });
 
   // "users" nom de la collection sur Firestore Database
-  const usersCollectionRef = collection(projectFirestore, "users");
+  const usersCollectionRef = collection(db, "users");
 
   // récupérer les données du Firestore avec snapshot
   useEffect(() => {
@@ -69,13 +61,10 @@ const Home = () => {
 
   return (
     <div className="container p-5">
-      <h1 className="display-3 text-light">Insta Like</h1>
+      <h1 className="display-3 text-light">React Firebase App</h1>
 
       {users.map((user, i) => (
-        <div
-          className="container p-5 d-flex justify-content-center"
-          key={user.id}
-        >
+        <div className="card-grid">
           <div className="card" style={{ width: "25rem" }}>
             <div className="card-body">
               <h5 className="card-title"> {user.username} </h5>
@@ -162,8 +151,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      <Upload />
     </div>
   );
 };

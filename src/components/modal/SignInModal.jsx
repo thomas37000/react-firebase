@@ -84,7 +84,7 @@ const SignInModal = () => {
                         required
                         type="email"
                         className="form-control"
-                        // id="signInEmail"
+                        autoComplete="on"
                       />
                     </div>
 
@@ -98,7 +98,7 @@ const SignInModal = () => {
                         required
                         type={mp ? "text" : "password"}
                         className="form-control"
-                        // id="signInPwd"
+                        autoComplete="on"
                       />
                       <img
                         onClick={togglePassword}

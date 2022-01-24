@@ -1,8 +1,11 @@
 import React, { useState, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+// import { createUserDocument } from "firebase";
 import { UserContext } from "../../context/UserContext";
 import eyeClose from "../icons/eye-close.svg";
 import eye from "../icons/eye.svg";
+
+// import { createUserDocument } from "../../firebase/config";
 
 const SignUpModal = () => {
   const { modalState, toggleModals, signUpContext } = useContext(UserContext);
@@ -11,6 +14,9 @@ const SignUpModal = () => {
   const [validationEmail, setValidationEmail] = useState("");
   const [mp, setMp] = useState(false);
   const [mp2, setMp2] = useState(false);
+  // const [form, setForm] = useState({
+  //   username: "",
+  // });
 
   const togglePassword = () => {
     setMp(mp ? false : true);
@@ -44,11 +50,18 @@ const SignUpModal = () => {
       return;
     }
     try {
-      const createUSer = await signUpContext(
+      const createUser = await signUpContext(
         currentRef[0].value,
         currentRef[1].value
       );
-      console.log(createUSer);
+      console.log("new user", createUser);
+      //  await createUserDocument(createUSer, form);
+
+      // const addDataNewUser = await signUpContext.then((cred) => {
+      //   return db.collection("users").doc(cred.user.uid).set(form);
+      // });
+
+      // console.log(addDataNewUser);
 
       formRef.current.reset();
       toggleModals("close");
@@ -65,6 +78,9 @@ const SignUpModal = () => {
         setValidationEmail("Email déjà utilisé ou enregistré !");
       }
     }
+    // setForm({
+    //   username: "",
+    // });
   };
 
   // efface les méssages d'érreurs et ferme le modale avec toggleModals
@@ -113,12 +129,29 @@ const SignUpModal = () => {
                         ref={addInputs}
                         type="email"
                         name="email"
-                        // id="signUpEmail"
                         className="form-control"
+                        autoComplete="on"
                         required
                       />
                       <p className="text-danger mt-1">{validationEmail}</p>
                     </div>
+                    {/* 
+                    <div className="mb-3">
+                      <label htmlFor="signUpName" className="form-label">
+                        nom ou pseudo
+                      </label>
+                      <input
+                        ref={addInputs}
+                        type="text"
+                        value={form.username}
+                        onChange={(e) =>
+                          setForm({ ...form, username: e.target.value })
+                        }
+                        className="form-control"
+                      />
+
+                      <p className="text-danger mt-1">{validationEmail}</p> 
+                    </div> */}
 
                     <div className="mb-3">
                       <label htmlFor="signUpPwd" className="form-label">
@@ -128,8 +161,8 @@ const SignUpModal = () => {
                         ref={addInputs}
                         type={mp ? "text" : "password"}
                         name="pwd"
-                        // id="signUpPwd"
                         className="form-control"
+                        autoComplete="on"
                         required
                       />
                       <img
@@ -161,8 +194,8 @@ const SignUpModal = () => {
                         ref={addInputs}
                         type={mp2 ? "text" : "password"}
                         name="pwd"
-                        // id="repeatPwd"
                         className="form-control"
+                        autoComplete="on"
                         required
                       />
                       <img
@@ -186,7 +219,7 @@ const SignUpModal = () => {
                     </div>
                     <p className="text-danger mt-1">{validationMp}</p>
 
-                    <button type="button" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary">
                       Validez
                     </button>
                   </form>

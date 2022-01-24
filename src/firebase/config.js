@@ -3,8 +3,6 @@ import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 //database from firebase
 import { getFirestore } from "firebase/firestore";
-import { getDatabase } from "firebase/database";
-import firebase from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,9 +17,29 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const projectStorage = getStorage(firebaseApp);
-const projectFirestore = getFirestore(firebaseApp);
+const db = getFirestore(firebaseApp);
 const Auth = getAuth(firebaseApp);
-const db = getDatabase(firebaseApp);
 // const timestamp = projectFirestore.FieldValue.serverTimestamp;
 
-export { projectStorage, projectFirestore, Auth, firebaseApp, db };
+export { projectStorage, Auth, firebaseApp, db };
+
+// export const createUserDocument = async (user, addNewData) => {
+//   if (!user) return;
+
+//   const userRef = projectFirestore.doc(`users/${user.uid}`);
+//   const snapshot = await userRef.get();
+
+//   if (!snapshot.exists) {
+//     const { email } = user;
+//     const { username } = addNewData;
+//     try {
+//       await userRef.set({
+//         username,
+//         email,
+//         createdAt: new Date(),
+//       });
+//     } catch (error) {
+//       console.log("Inscription non réussie", error);
+//     }
+//   }
+// };
