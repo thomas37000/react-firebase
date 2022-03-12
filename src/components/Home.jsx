@@ -8,7 +8,6 @@ import "../App.css";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
-  console.log("data", users);
 
   const [form, setForm] = useState({
     age: null,

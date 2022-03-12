@@ -52,8 +52,8 @@ export function UserContextProvider(props) {
       setModalState({
         signUpModal: false,
         signInModal: false,
-      });
-    }
+        });
+      }
   };
 
   return (
