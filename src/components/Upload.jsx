@@ -18,7 +18,7 @@ const Upload = () => {
   const formHandler = (e) => {
     e.preventDefault();
     const selectedImg = e.target[0].files[0];
-    console.log(selectedImg);
+   // console.log(selectedImg);
 
     if (selectedImg) {
       setFile(selectedImg);
